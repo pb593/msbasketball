@@ -1,12 +1,23 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux'
-import store from './store'
-import Routers from './routes/index'
+import { ConnectedRouter } from 'connected-react-router'
+
+import { store, history } from './store'
+import routes from './routes/index'
+
+
+const App = ({ history }) => {
+    return (
+        <ConnectedRouter history={history}>
+            { routes }
+        </ConnectedRouter>
+    )
+};
 
 render (
   <Provider store={store}>
-    <Routers />
+      <App history={history} />
   </Provider>,
   document.getElementById('root')
 );
