@@ -23,9 +23,9 @@ class BusinessControllerV1 extends MsbasketballStack with JacksonJsonSupport {
 
   get("/events") {
     List(
-      Event(DateTime.now, 1000123, 50.00, List(Signup(10, Status.In))),
-      Event(DateTime.now, 12378132, 50.00, List(Signup(10, Status.PendingOut), Signup(12, Status.In))),
-      Event(DateTime.now, 15187236, 50.00, List(Signup(10, Status.PendingOut)))
+      Event(DateTime.now, 1000123, 50.00, List(Signup(61872312, Status.In))),
+      Event(DateTime.now, 12378132, 50.00, List(Signup(1231231, Status.PendingOut), Signup(61872312, Status.In))),
+      Event(DateTime.now, 15187236, 50.00, List(Signup(1231231, Status.PendingOut)))
     )
   }
 
