@@ -6,7 +6,6 @@ import {
 const initialState = [];
 
 const Events = (state = initialState, action) => {
-  debugger;
   switch(action.type) {
     case EVENT_LIST_SUCCESS:
       return [ ...action.json ];

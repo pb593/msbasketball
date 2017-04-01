@@ -7,16 +7,6 @@ import Loading from "../components/LoadingPage"
 import { listEvents } from '../../actions/EventActions';
 
 
-const products = [{
-    id: 1,
-    name: "Product1",
-    price: 120
-}, {
-    id: 2,
-    name: "Product2",
-    price: 80
-}];
-
 class EventsPage extends Component {
 
     constructor (props) {
