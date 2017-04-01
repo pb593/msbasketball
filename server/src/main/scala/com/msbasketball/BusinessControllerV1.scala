@@ -16,7 +16,6 @@ class BusinessControllerV1 extends MsbasketballStack with JacksonJsonSupport wit
   protected implicit lazy val jsonFormats: Formats = DefaultFormats ++
                                                       JavaTypesSerializers.all ++
                                                       JodaTimeSerializers.all + new EnumNameSerializer(Status)
-
   // allow CORS
   options("/*"){
     response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"));
@@ -41,5 +40,4 @@ class BusinessControllerV1 extends MsbasketballStack with JacksonJsonSupport wit
       Participant("Evgeniy Grigoriev", 1231231, 21)
     )
   }
-
 }
