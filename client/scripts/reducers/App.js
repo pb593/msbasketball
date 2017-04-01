@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import Events from './Events'
+import events from './Events'
 
 const portalApp = combineReducers({
-  Events
+  events
 });
 
 export default portalApp

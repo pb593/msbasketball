@@ -37,13 +37,13 @@ class EventsPage extends Component {
     render() {
         return this.state.ready
             ? <Events
-                products={products}
+                events={this.events}
             />
             : <Loading/>
     }
 }
 
 export default connect(
-    (state, props) => ({}),
+    (state, props) => ({events: state.events}),
     dispatch => ({listEvents: bindActionCreators(listEvents, dispatch),})
 )(EventsPage)
