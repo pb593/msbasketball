@@ -4,17 +4,22 @@ import org.joda.time.DateTime
 import org.json4s.{DefaultFormats, Formats}
 import org.scalatra.json.JacksonJsonSupport
 import org.json4s.ext.{EnumNameSerializer, JavaTypesSerializers, JodaTimeSerializers}
+import org.scalatra.CorsSupport
 
 /**
   * Created by pb593 on 01/04/2017.
   */
-class BusinessControllerV1 extends MsbasketballStack with JacksonJsonSupport {
+class BusinessControllerV1 extends MsbasketballStack with JacksonJsonSupport with CorsSupport {
 
   // Sets up automatic case class to JSON output serialization, required by
   // the JValueResult trait.
   protected implicit lazy val jsonFormats: Formats = DefaultFormats ++
                                                       JavaTypesSerializers.all ++
                                                       JodaTimeSerializers.all + new EnumNameSerializer(Status)
+  // allow CORS
+  options("/*"){
+    response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"));
+  }
 
   // Before every action runs, set the content type to be in JSON format.
   before() {
@@ -35,5 +40,4 @@ class BusinessControllerV1 extends MsbasketballStack with JacksonJsonSupport {
       Participant("Evgeniy Grigoriev", 1231231, 21)
     )
   }
-
 }
