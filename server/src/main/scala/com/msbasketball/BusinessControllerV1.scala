@@ -1,7 +1,5 @@
 package com.msbasketball
 
-import java.util.{Date, UUID}
-
 import org.joda.time.DateTime
 import org.json4s.{DefaultFormats, Formats}
 import org.scalatra.json.JacksonJsonSupport
@@ -25,18 +23,17 @@ class BusinessControllerV1 extends MsbasketballStack with JacksonJsonSupport {
 
   get("/events") {
     List(
-      Event(DateTime.now, 1000123, 50.00),
-      Event(DateTime.now, 12378132, 50.00),
-      Event(DateTime.now, 15187236, 50.00)
+      Event(DateTime.now, 1000123, 50.00, List(Signup(10, Status.In))),
+      Event(DateTime.now, 12378132, 50.00, List(Signup(10, Status.PendingOut), Signup(12, Status.In))),
+      Event(DateTime.now, 15187236, 50.00, List(Signup(10, Status.PendingOut)))
     )
   }
 
   get("/participants") {
-    Participant("Pavel Berkovich", 61872312, 21)
-  }
-
-  get("/signups") {
-    Signup(12387123, 123132, Status.Out)
+    List(
+      Participant("Pavel Berkovich", 61872312, 21),
+      Participant("Evgeniy Grigoriev", 1231231, 21)
+    )
   }
 
 }

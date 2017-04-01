@@ -1,7 +1,5 @@
 package com.msbasketball
 
-import java.util.UUID
-
 import org.joda.time.DateTime
 
 /**
@@ -14,6 +12,8 @@ object Status extends Enumeration {
 }
 
 // other business entities
-case class Event (datetime: DateTime, id: Integer, fullPrice: Double)
+case class Event (datetime: DateTime, id: Integer, fullPrice: Double, signUps: List[Signup])
+case class Signup(participantId: Integer, status: Status.Value)
+
 case class Participant(name: String, id: Integer, balance: Double)
-case class Signup(userId: Integer, eventId: Integer, status: Status.Value)
+
