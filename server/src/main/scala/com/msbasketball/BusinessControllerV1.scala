@@ -21,6 +21,11 @@ class BusinessControllerV1 extends MsbasketballStack with JacksonJsonSupport wit
     response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"));
   }
 
+  // allow CORS
+  options("/*"){
+    response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"));
+  }
+
   // Before every action runs, set the content type to be in JSON format.
   before() {
     contentType = formats("json")
