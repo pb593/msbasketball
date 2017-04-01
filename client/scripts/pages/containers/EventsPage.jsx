@@ -1,6 +1,11 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import Events from "../components/EventsPage"
+import Loading from "../components/LoadingPage"
+import { listEvents } from '../../actions/EventActions';
+
 
 const products = [{
     id: 1,
@@ -16,18 +21,17 @@ class EventsPage extends Component {
 
     constructor (props) {
         super(props);
-        this.state = {ready: true};
+        this.state = {ready: false};
     }
 
     componentDidMount() {
-        // this.props.getTaskData(this.taskId).
-        // then(() => this.setState({ready: true}));
+        this.props.listEvents().then(() => this.setState({ready: true}));
     }
 
     componentWillReceiveProps (nextProps) {
-        // if (nextProps.task) {
-        //     this.task = nextProps.task;
-        // }
+        if (nextProps.events) {
+            this.events = nextProps.events;
+        }
     }
 
     render() {
@@ -35,8 +39,11 @@ class EventsPage extends Component {
             ? <Events
                 products={products}
             />
-            : <Temporary/>
+            : <Loading/>
     }
 }
 
-export default EventsPage;
+export default connect(
+    (state, props) => ({}),
+    dispatch => ({listEvents: bindActionCreators(listEvents, dispatch),})
+)(EventsPage)

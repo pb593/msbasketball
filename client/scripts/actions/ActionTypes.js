@@ -1,4 +1,6 @@
 export const ACTIONS_COUNT = 3;
 
+export const EVENT_LIST = "EVENT_LIST";
+export const GROUP_LIST_REQUEST = "GROUP_LIST_REQUEST";
 export const EVENT_LIST_SUCCESS = "EVENT_LIST_SUCCESS";
 export const EVENT_LIST_FAILURE = "EVENT_LIST_FAILURE";
