@@ -1,5 +1,6 @@
 package com.msbasketball
 
+import com.msbasketball.Status.Status
 import org.joda.time.DateTime
 
 /**
@@ -8,12 +9,13 @@ import org.joda.time.DateTime
 
 // Status case object
 object Status extends Enumeration {
+  type Status = Value
   val In, Out, Waiting, PendingOut = Value
 }
 
 // other business entities
-case class Event (datetime: DateTime, id: Integer, fullPrice: Double, signUps: List[Signup])
-case class Signup(participantId: Integer, status: Status.Value)
+case class Event (datetime: DateTime, id: Int, fullPrice: Double, signUps: List[Signup])
+case class Signup(participantId: Int, status: Status)
 
-case class Participant(name: String, id: Integer, balance: Double)
+case class Participant(name: String, id: Int, balance: Double)
 
