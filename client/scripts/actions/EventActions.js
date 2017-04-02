@@ -1,4 +1,4 @@
-import { EVENT_LIST } from './ActionTypes';
+import { EVENT_LIST, EVENT_CREATE } from './ActionTypes';
 import { CALL_API } from '../middleware/api';
 import * as EventUrls from '../urlEndpoints/Events';
 import { listParticipants } from './ParticipantActions';
@@ -13,6 +13,17 @@ function list () {
     }
 }
 
+function create (event) {
+    return {
+        [CALL_API]: {
+            types: [EVENT_CREATE],
+            endpoint: EventUrls.index,
+            method: 'POST',
+            data: event
+        }
+    }
+}
+
 export const listEvents = () => dispatch => (dispatch(list()));
 
 //fixme: Лежит здесь потому что сюда положили
@@ -23,3 +34,11 @@ export const requestEventsTableData = () => dispatch => {
     ];
     return Promise.all(promises);
 };
+
+//fixme: fullPrice is a temporary solution
+export const createEvent = (dateTime) => dispatch => (dispatch(create(
+    {
+        "dateTime": dateTime,
+        "fullPrice": 100
+    }
+)));
