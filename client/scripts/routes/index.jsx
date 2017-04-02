@@ -1,15 +1,18 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-import LayoutPage from '../pages/containers/LayoutPage'
+import { Route, Switch } from 'react-router'
+
+import MasterPage from '../pages/containers/MasterPage'
+import NavigationBarPage from '../pages/components/NavBarPage'
 
 
-const Routers = () => (
-  <Router>
-    <Route path="/" component={ LayoutPage }/>
-  </Router>
+const routes = (
+    <div>
+        <NavigationBarPage />
+        <Switch>
+            <Route path="/" component={ MasterPage }/>
+            {/*<Route component={NoMatch} />*/}
+        </Switch>
+    </div>
 );
 
-export default connect(
-    state => ({})
-)(Routers);
+export default routes;
