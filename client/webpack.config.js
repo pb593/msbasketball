@@ -59,7 +59,7 @@ module.exports = {
     publicPath: '/static/'
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx', '.css']
   },
   devtool: 'eval-source-map',
   plugins: [
@@ -72,7 +72,17 @@ module.exports = {
         test: /\.jsx?$/,
         loaders: ['babel'],
         include: path.join(__dirname, 'scripts')
-      }
+      },
+      {
+          test: /\.css$/,
+          exclude: /react-infinite-calendar/,
+          loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+      },
+      {
+          test: /\.css$/,
+          include: /react-infinite-calendar/,
+          loader: 'style-loader!css-loader',
+      },
     ]
   }
 };
