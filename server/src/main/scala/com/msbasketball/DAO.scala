@@ -6,6 +6,8 @@ import slick.jdbc.meta._
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
 
+import scala.concurrent.ExecutionContext.Implicits.global
+
 /**
   * Created by pb593 on 01/04/2017.
   */
@@ -18,6 +20,8 @@ class DAO {
   val db = Database.forConfig("h2mem1")
 
   db.run((events.schema ++ participants.schema ++ signups.schema).create)
+
+  db.run(MTable.getTables).onSuccess { case s => println(s"DB Created: $s") }
 
 
   def getAllEvents: List[Event] = {
