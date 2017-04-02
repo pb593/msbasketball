@@ -6,6 +6,8 @@ import org.scalatra.json.JacksonJsonSupport
 import org.json4s.ext.{EnumNameSerializer, JavaTypesSerializers, JodaTimeSerializers}
 import org.scalatra.CorsSupport
 
+import scala.util.{Failure, Success}
+
 /**
   * Created by pb593 on 01/04/2017.
   */
@@ -38,9 +40,14 @@ class BusinessControllerV1 extends MsbasketballStack with JacksonJsonSupport wit
   }
 
   get("/participants") {
-    List(
-      Participant("Pavel Berkovich", 61872312, 21),
-      Participant("Evgeniy Grigoriev", 1231231, 21)
-    )
+    dao.getAllPariticipants.onComplete {
+      case Success(partLst) => partLst
+      case Failure(e) => Nil
+    }
+  }
+
+  post("/participants") {
+    val p = parsedBody.extract[Participant]
+    dao.addNewParticipant(p)
   }
 }

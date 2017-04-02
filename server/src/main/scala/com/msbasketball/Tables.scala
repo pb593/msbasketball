@@ -38,17 +38,18 @@ class Signups(tag: Tag) extends Table[(Int, Int, Status)](tag, "SIGNUPS") {
   def event: ForeignKeyQuery[Events, (Int, DateTime, Double)] =
                                         foreignKey("EVENT_FK", eventId, TableQuery[Events])(_.id)
   // FK relationship for participants
-  def participant: ForeignKeyQuery[Participants, (String, Int, Double)] =
+  def participant: ForeignKeyQuery[Participants, (String, String, Int, Double)] =
                                         foreignKey("PARTICIPANT_FK", participantId, TableQuery[Participants])(_.id)
 
 }
 
-class Participants(tag: Tag) extends Table[(String, Int, Double)](tag, "PARTICIPANTS") {
+class Participants(tag: Tag) extends Table[(String, String, Int, Double)](tag, "PARTICIPANTS") {
 
   def name: Rep[String] = column[String]("name")
+  def email: Rep[String] = column[String]("email")
   def id: Rep[Int] = column[Int]("participantId", O.PrimaryKey, O.AutoInc)
   def balance: Rep[Double] = column[Double]("balance")
 
-  def * = (name, id, balance)
+  def * = (name, email, id, balance)
 
 }

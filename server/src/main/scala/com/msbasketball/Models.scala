@@ -17,5 +17,5 @@ object Status extends Enumeration {
 case class Event (datetime: DateTime, id: Int, fullPrice: Double, signUps: List[Signup])
 case class Signup(participantId: Int, status: Status)
 
-case class Participant(name: String, id: Int, balance: Double)
+case class Participant(name: String, email: String, id: Int, balance: Double)
 
