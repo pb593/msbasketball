@@ -24,6 +24,7 @@ class DAO {
 
   def getAllEvents: Future[List[Event]] = {
 
+    /*
     val query = for {
       (evt, sgn) <- events join signups on (_.id == _.eventId)
     } yield (evt.datetime, evt.id, evt.fullPrice, sgn.participantId, sgn.status)
@@ -42,8 +43,9 @@ class DAO {
       }
     }
 
+    */
 
-
+    Future { Nil }
 
   }
 

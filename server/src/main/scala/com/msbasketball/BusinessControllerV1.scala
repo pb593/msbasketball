@@ -5,6 +5,7 @@ import org.json4s.{DefaultFormats, Formats}
 import org.scalatra.json.JacksonJsonSupport
 import org.json4s.ext.{EnumNameSerializer, JavaTypesSerializers, JodaTimeSerializers}
 import org.scalatra.CorsSupport
+import scala.concurrent.ExecutionContext.Implicits.global
 
 import scala.util.{Failure, Success}
 
