@@ -3,17 +3,38 @@ import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 
 
 const EventsTable = ({events, participants}) => {
-    const participantCols = [
-        <TableHeaderColumn isKey dataField='name'>Name</TableHeaderColumn>,
-        <TableHeaderColumn dataField='balance'>Balance</TableHeaderColumn>
-    ];
-    //fixme: Join events and participants on signup
-    const eventCols = events.map((event) => (
-        <TableHeaderColumn dataField={"" + event.id}>{event.datetime}</TableHeaderColumn>
-    ));
+    // lift up participant ids for O(1) search afterwards
+    events = events.map((event) => {
+        event.participants = event.signUps.reduce((result, signup) => {
+            result[signup.participantId] = signup;
+            return result;
+        }, {});
+        return event
+    });
+
+    const resultTable = participants.map(
+        (participant) => {
+            // fill in participant's signup status for each event
+            return events.reduce((result, event) => {
+                if (participant.id in event.participants)
+                    result[event.datetime] = event.participants[participant.id].status;
+                else
+                    result[event.datetime] = "Out";
+                return result;
+            }, {"Participant": participant.name});
+        }
+    );
+
+    // create "The table" using first column template
+    const tableColumns = Object.keys(resultTable[0]).map((key, index) => {
+        if (index == 0)
+            return <TableHeaderColumn key={index} isKey={true} dataField={key}>{key}</TableHeaderColumn>;
+        else
+            return <TableHeaderColumn key={index} dataField={key}>{key}</TableHeaderColumn>;
+    });
     return (
-        <BootstrapTable data={participants} striped hover condensed>
-            {participantCols.concat(eventCols)}
+        <BootstrapTable data={resultTable} striped hover condensed>
+            {tableColumns}
         </BootstrapTable>
     )
 };

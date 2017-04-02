@@ -24,12 +24,16 @@ class MasterPage extends Component {
     }
 
     render() {
-        return this.state.ready
+        const tableComponent = this.state.ready
             ? <EventsTable
                 events={this.events}
                 participants={this.participants}
             />
-            : <Loading/>
+            : <Loading/>;
+
+        return <div>
+            {tableComponent}
+        </div>
     }
 }
 
